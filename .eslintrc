@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "wesbos"
+  ],
+  "rules": {
+    "no-plusplus": "off",
+    "no-unused-expressions": "off",
+    "no-use-before-define": "off",
+  }
+}

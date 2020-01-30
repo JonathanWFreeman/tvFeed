@@ -1,0 +1,38 @@
+{
+  "name": "tvfeed",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "author": "Jonathan Freeman",
+  "license": "ISC",
+  "dependencies": {
+    "date-fns": "^2.9.0",
+    "date-fns-tz": "^1.0.9",
+    "normalize.css": "^8.0.1",
+    "reset.css": "^2.0.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^9.0.0",
+    "eslint": "^5.14.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-config-wesbos": "0.0.19",
+    "eslint-plugin-html": "^5.0.3",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-react-hooks": "^1.3.0",
+    "parcel-bundler": "^1.12.4",
+    "prettier": "^1.16.4"
+  },
+  "browserslist": [
+    "last 1 chrome versions"
+  ]
+}

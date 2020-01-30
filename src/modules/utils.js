@@ -11,15 +11,6 @@ export function generateShowTypeOptions(list) {
   showTypeSelector.innerHTML = showTypeOptions;
 }
 
-// export const generateShowContainer = show => {
-//   const image = 'https://i.picsum.photos/id/229/200/200.jpg';
-//   return `
-//   <div class="show">
-//   <img src="${show.show.image ? show.show.image.medium : image}"/>
-//   <p>${convert12hrTime(show.airstamp)}</p>
-//   </div>
-// `};
-
 export function handleError(err) {
   console.log('Uh oh! Error!');
   console.log(err);
@@ -50,13 +41,17 @@ export function generateShowContainer([airTime, tvShow]) {
                 .map(
                   show => `
                   <div class="show-container">
-                    <h3 class="show-network">${show.show.network.name}</h3>
+                    <h3 class="show-network">${
+                      show.show.network ? show.show.network.name : 'Unavailable'
+                    }</h3>
                     <div class="show-info">
                       <img src="${
                         show.show.image ? show.show.image.medium : image
                       }"/>
                       <div class="show-desc">
-                        <h4>${show.show.name}</h4>
+                        <h4>${
+                          show.show.name ? show.show.name : 'Unavailable'
+                        }</h4>
                       </div>
                     </div>
                   </div>

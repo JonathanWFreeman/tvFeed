@@ -11,59 +11,46 @@ import {
   sortedByAirtime,
 } from './src/modules/utils';
 import { app, date, optionsForm } from './src/modules/selectors';
+import optionsFilter from './src/modules/filters';
 
 let listOfShows;
 
-async function generateShowList(type = null) {
+async function generateShowList(type = null, timeOfShow = 'primetime') {
+  // create a show list array from fetchApi
   if (!listOfShows) {
     const list = await filterTodayShows().catch(handleError);
     listOfShows = list;
     generateShowTypeOptions(listOfShows);
   }
 
-  // const showHTML = listOfShows
-  //   .filter(({show}) => type ? show.type === type : show)
-  //   // .filter(({show}) => show.type !== 'News' && show.type !== 'Talk Show')
-  //   .map(generateShowContainer)
-  //   .join('');
+  const filteredList = optionsFilter(listOfShows, timeOfShow);
 
-  const filteredList = listOfShows.filter(show => {
-    const time = parseInt(
-      convert24hrTime(convertToUserTimeZone(show.airstamp))
-    );
-
-    if (time >= 19) {
-      return show;
-    }
-    return null;
-  });
-  console.log(listOfShows);
-  console.log(filteredList);
-
-  const showHTML = Object.entries(sortedByAirtime(filteredList))
+  const generateHTML = Object.entries(sortedByAirtime(filteredList))
     .map(generateShowContainer)
     .join('');
 
-  app.innerHTML = showHTML;
+  app.innerHTML = generateHTML;
 }
 
-function handleInput(e) {
+function handleFormInput(e) {
+  console.log(e);
+  console.log(e.target);
+  console.log(e.target.value);
+
   let showType = e.target.value;
+  let showTime;
+
   if (showType === 'All') {
     showType = null;
   }
-  generateShowList(showType);
+
+  if (e.target.type === 'radio') {
+    showTime = e.target.value;
+  }
+  generateShowList(showType, showTime);
 }
 
-optionsForm.addEventListener('input', handleInput);
+optionsForm.addEventListener('input', handleFormInput);
 date.textContent = userTodayDate;
-
-// add git, figure out SSH
-// add prettier
-
-// sort cache for times
-// idea for rows
-// filter foreach reduce? loop through add to new array that separates
-// loop through new array
 
 generateShowList();

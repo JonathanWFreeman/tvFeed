@@ -5,8 +5,10 @@ import {
   userTomorrowDate,
   convertToUserTimeZone,
 } from './timeZone';
+import { generateShowTypeOptions, handleError } from './utils';
 
 const endpoint = 'https://api.tvmaze.com/schedule?country=US&date=';
+let listOfShows;
 
 async function fetchShows() {
   let showList = [];
@@ -32,5 +34,13 @@ async function filterTodayShows() {
   );
   return filteredShows;
 }
+
+// async function showListForToday() {
+//   if (!listOfShows) {
+//     listOfShows = await filterTodayShows().catch(handleError);
+//     generateShowTypeOptions(listOfShows);
+//   }
+//   return listOfShows;
+// }
 
 export default filterTodayShows;

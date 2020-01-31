@@ -34,7 +34,7 @@ export function generateShowContainer([airTime, tvShow]) {
   // console.log(airTime);
   // console.log(tvShow);
 
-  return `<div class="container">
+  return `<div class="container-grid">
             <h2>${airTime}</h2>
             <div class="show-grid-container">
               ${tvShow

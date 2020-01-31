@@ -10,7 +10,7 @@ import {
   generateShowContainer,
   sortedByAirtime,
 } from './src/modules/utils';
-import { app, date, optionsForm } from './src/modules/selectors';
+import { app, date, optionsForm, menuToggle } from './src/modules/selectors';
 import optionsFilter from './src/modules/filters';
 
 let listOfShows;
@@ -50,7 +50,22 @@ function handleFormInput(e) {
   generateShowList(showType, showTime);
 }
 
+const navMenu = document.querySelector('header');
+
+let isTrue = false;
+function handleToggle(e) {
+  console.log(e);
+  console.dir(navMenu);
+  isTrue = !isTrue;
+  console.log(isTrue);
+
+  isTrue
+    ? navMenu.classList.add('toggle-open')
+    : navMenu.classList.remove('toggle-open');
+}
+
 optionsForm.addEventListener('input', handleFormInput);
+menuToggle.addEventListener('click', handleToggle);
 date.textContent = userTodayDate;
 
 generateShowList();

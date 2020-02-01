@@ -1,16 +1,28 @@
 header {
   position: fixed;
-  background-color: purple;
+  background-color: #1A1C20;
   height: 100vh;
   width: 250px;
   transition: margin-left .5s;
+  box-shadow: 0 0 10px 4px rgb(28, 28, 28);
+  padding: 10px 0;
 }
 
 nav ul li {
   padding: 20px;
-  background: green;
   margin-bottom: 5px;
+}
 
+.active {
+  background: #222A31;
+  box-shadow: -10px -1px 11px 2px #151515;
+  width: 105%;
+  color: #F83646;
+}
+
+.title {
+  margin: 20px 0 40px;
+  text-align: center;
 }
 
 form {
@@ -22,9 +34,7 @@ form select, form fieldset {
 }
 
 .nav-container {
-  background-color: purple;
   transition: width .3s;
-  /* height: 100vh; */
 }
 
 .menu-toggle {

@@ -1,17 +1,20 @@
 import filterTodayShows from './src/modules/fetchApi';
-import {
-  userTodayDate,
-  convertToUserTimeZone,
-  convert24hrTime,
-} from './src/modules/timeZone';
+import { userTodayDate } from './src/modules/timeZone';
 import {
   generateShowTypeOptions,
   handleError,
   generateShowContainer,
   sortedByAirtime,
 } from './src/modules/utils';
-import { app, date, optionsForm, menuToggle } from './src/modules/selectors';
+import {
+  app,
+  date,
+  optionsForm,
+  menuToggle,
+  nav,
+} from './src/modules/selectors';
 import optionsFilter from './src/modules/filters';
+import { handleToggle, handleNavClick } from './src/modules/handlers';
 
 let listOfShows;
 
@@ -50,22 +53,10 @@ function handleFormInput(e) {
   generateShowList(showType, showTime);
 }
 
-const navMenu = document.querySelector('header');
-
-let isTrue = false;
-function handleToggle(e) {
-  console.log(e);
-  console.dir(navMenu);
-  isTrue = !isTrue;
-  console.log(isTrue);
-
-  isTrue
-    ? navMenu.classList.add('toggle-open')
-    : navMenu.classList.remove('toggle-open');
-}
-
 optionsForm.addEventListener('input', handleFormInput);
 menuToggle.addEventListener('click', handleToggle);
+nav.addEventListener('click', handleNavClick);
+
 date.textContent = userTodayDate;
 
 generateShowList();

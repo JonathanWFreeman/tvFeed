@@ -1,23 +1,48 @@
-import { userTodayDate } from './timeZone';
-import { date, optionsForm } from './selectors';
+import { header } from './selectors';
 
-function handleInput(e) {
+let isTrue = false;
+
+export function handleToggle(e) {
   console.log(e);
-  console.log(e.target);
-  console.log(e.target.value);
+  console.dir(header);
+  isTrue = !isTrue;
+  console.log(isTrue);
 
-  let showType = e.target.value;
-  let showTime;
-
-  if (showType === 'All') {
-    showType = null;
-  }
-
-  if (e.target.type === 'radio') {
-    showTime = e.target.value;
-  }
-  generateShowList(showType, showTime);
+  isTrue
+    ? header.classList.add('toggle-open')
+    : header.classList.remove('toggle-open');
 }
 
-optionsForm.addEventListener('input', handleInput);
-date.textContent = userTodayDate;
+export function handleNavClick(e) {
+  console.dir(e.currentTarget.children[0].children);
+  const navUl = Array.from(e.currentTarget.children[0].children);
+
+  console.dir(navUl);
+  navUl.forEach(el => el.classList.remove('active'));
+  // e.currentTarget.children[0].children.classList.remove('active');
+  e.target.classList.add('active');
+}
+
+// import { userTodayDate } from './timeZone';
+// import { date, optionsForm } from './selectors';
+
+// function handleInput(e) {
+//   console.log(e);
+//   console.log(e.target);
+//   console.log(e.target.value);
+
+//   let showType = e.target.value;
+//   let showTime;
+
+//   if (showType === 'All') {
+//     showType = null;
+//   }
+
+//   if (e.target.type === 'radio') {
+//     showTime = e.target.value;
+//   }
+//   generateShowList(showType, showTime);
+// }
+
+// optionsForm.addEventListener('input', handleInput);
+// date.textContent = userTodayDate;

@@ -3,3 +3,5 @@ export const date = document.querySelector('.date');
 export const showTypeSelector = document.querySelector('[name="showType"]');
 export const optionsForm = document.querySelector('form');
 export const menuToggle = document.querySelector('.menu-toggle');
+export const header = document.querySelector('header');
+export const nav = document.querySelector('nav');

@@ -38,6 +38,26 @@ main {
   /* box-shadow: 0 0 10px 4px rgb(28, 28, 28); */
 }
 
+.show-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14rem;
+}
+
+.show-imdb {
+  transform: scale(.8);
+}
+
+.show-rating {
+  display: flex;
+  align-items: center;
+}
+
+.show-rating svg {
+  transform: scale(.5);
+}
+
 .show-title {
   margin-top: 10px;
 }

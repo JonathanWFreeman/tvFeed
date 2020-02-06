@@ -4,7 +4,7 @@
 
 html{ 
   /* background-color: var(--main-bg-color); */
-  /*font-size: 1px;/*for using REM units*/
+  font-size: 1px;/*for using REM units*/
 
 }
 
@@ -19,4 +19,29 @@ html{
 body {
   font-family: 'Open Sans', sans-serif;
   color: #FFF;
+  font-size: 18rem;
+}
+
+h1 {
+  font-size: 35rem;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 30rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 20rem;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 20rem;
+}
+
+.nav-days {
+  font-size: 22rem;
+  font-weight: 600;
 }

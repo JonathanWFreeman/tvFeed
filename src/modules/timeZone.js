@@ -30,4 +30,5 @@ export function convert24hrTime(airstamp) {
 export const userYesterdayDate = format(startOfYesterday(), 'yyyy-MM-dd');
 export const userTodayDate = format(now, 'yyyy-MM-dd');
 export const userTomorrowDate = format(startOfTomorrow(), 'yyyy-MM-dd');
+export const currentDate = format(now, 'EEEE, LLLL Lo, yyyy');
 // export const userDate = '2020-01-12';

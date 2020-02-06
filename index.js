@@ -1,5 +1,5 @@
 import filterTodayShows from './src/modules/fetchApi';
-import { userTodayDate } from './src/modules/timeZone';
+import { currentDate } from './src/modules/timeZone';
 import {
   generateShowTypeOptions,
   handleError,
@@ -57,6 +57,6 @@ optionsForm.addEventListener('input', handleFormInput);
 menuToggle.addEventListener('click', handleToggle);
 nav.addEventListener('click', handleNavClick);
 
-date.textContent = userTodayDate;
+date.textContent = currentDate;
 
 generateShowList();

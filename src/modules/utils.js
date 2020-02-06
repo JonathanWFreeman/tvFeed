@@ -28,14 +28,14 @@ export function sortedByAirtime(listOfShows) {
   }, []);
 }
 
-export function generateShowContainer([airTime, tvShow]) {
+export function generateShowContainer([airtime, tvShow]) {
   const image = 'https://i.picsum.photos/id/229/200/200.jpg';
 
   // console.log(airTime);
   // console.log(tvShow);
 
   return `<div class="container-grid">
-            <h2>${airTime}</h2>
+            <h2 class="airtime">${airtime}</h2>
             <div class="show-grid-container">
               ${tvShow
                 .map(
@@ -49,7 +49,7 @@ export function generateShowContainer([airTime, tvShow]) {
                         show.show.image ? show.show.image.medium : image
                       }"/>
                       <div class="show-desc">
-                        <h4>${
+                        <h4 class="show-title">${
                           show.show.name ? show.show.name : 'Unavailable'
                         }</h4>
                       </div>

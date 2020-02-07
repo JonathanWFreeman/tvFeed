@@ -4,21 +4,23 @@ header {
   height: 100vh;
   width: 250px;
   transition: margin-left .5s;
-  box-shadow: 0 0 10px 4px rgb(28, 28, 28);
+  /* box-shadow: 0 0 8px 0 rgb(28, 28, 28); */
   padding: 10px 0;
   z-index: 100;
 }
 
-nav ul li {
+nav div button {
   padding: 20px;
   margin-bottom: 5px;
   cursor: pointer;
+  width: 100%;
+  text-align: center;
+  outline: none;
 }
 
 .active {
   background: #222A31;
-  box-shadow: -10px -1px 11px 2px #151515;
-  width: 105%;
+  box-shadow: -20px 0 11px 2px #151515;
   color: #F83646;
 }
 

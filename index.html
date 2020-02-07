@@ -15,24 +15,24 @@
     <div class="menu-toggle">&#x1F4A9;</div>
     <section class="nav-container">
       <h1 class="title">TV Shows</h1>
-      <nav>
-        <ul class="nav-days">
-          <!-- TODO: CHANGE TO BUTTONS -->
-          <li class="active" data-day="today">Today</li class="active">
-          <li data-day="tomorrow">Tomorrow</li>
-        </ul>
-      </nav>
-      <form>
-        <select name="showType">
-          <option value="test">test</option>
-        </select>
-        <fieldset id="filter-time" class="radio-pillbox">
-          <input type="radio" name="filter-time" value="primetime" id="primetime" checked>
-          <label for="primetime" class="radio-label">Primetime</label>
-          <input type="radio" name="filter-time" value="daytime" id="daytime">
-          <label for="daytime" class="radio-label">Daytime</label>
-        </fieldset>
-      </form>
+      <div id="filters">
+        <nav>
+          <div class="nav-days">
+            <button class="active" data-day="today">Today</button>
+            <button data-day="tomorrow">Tomorrow</button>
+          </div>
+        </nav>
+        <form>
+          <div name="showType">
+          </div>
+          <fieldset id="filter-time" class="radio-pillbox">
+            <input type="radio" name="filter-time" value="primetime" id="primetime" checked>
+            <label for="primetime" class="radio-label">Primetime</label>
+            <input type="radio" name="filter-time" value="daytime" id="daytime">
+            <label for="daytime" class="radio-label">Daytime</label>
+          </fieldset>
+        </form>
+      </div>
     </section>
 
   </header>

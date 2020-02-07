@@ -3,10 +3,7 @@ import { header } from './selectors';
 let isTrue = false;
 
 export function handleToggle(e) {
-  console.log(e);
-  console.dir(header);
   isTrue = !isTrue;
-  console.log(isTrue);
 
   isTrue
     ? header.classList.add('toggle-open')
@@ -14,11 +11,8 @@ export function handleToggle(e) {
 }
 
 export function handleNavClick(e) {
-  console.dir(e.target.dataset.day);
-  console.dir(e.currentTarget.children[0].children);
   const navUl = Array.from(e.currentTarget.children[0].children);
 
-  console.dir(navUl);
   navUl.forEach(el => el.classList.remove('active'));
   // e.currentTarget.children[0].children.classList.remove('active');
   e.target.classList.add('active');

@@ -4,9 +4,14 @@ import { convertToUserTimeZone, convert12hrTime } from './timeZone';
 export function generateShowTypeOptions(list) {
   const getShowTypes = list.map(({ show }) => show.type);
   const removeShowTypeDuplicates = [...new Set(getShowTypes)];
-  removeShowTypeDuplicates.unshift('All');
+  // removeShowTypeDuplicates.unshift('All');
   const showTypeOptions = removeShowTypeDuplicates
-    .map(show => `<option value="${show}">${show}</option>`)
+    .map(
+      show => `
+      <input type="checkbox" id="${show}" name="${show}" value="${show}" checked>
+      <label for="${show}">${show}</label></br>
+      `
+    )
     .join('');
   showTypeSelector.innerHTML = showTypeOptions;
 }
@@ -28,7 +33,7 @@ export function sortedByAirtime(listOfShows) {
   }, []);
 }
 
-function checkExternalLink(show) {
+export function checkExternalLink(show) {
   if (show.show.externals.imdb) {
     return `<span class="show-imdb"><a href="https://www.imdb.com/title/${
       show.show.externals.imdb
@@ -44,50 +49,7 @@ function checkExternalLink(show) {
   }" target="_blank">${imdbSvg}</a></span>`;
 }
 
-export function generateShowContainer([airtime, tvShow]) {
-  const image = 'https://i.picsum.photos/id/229/200/200.jpg';
-
-  // console.log(airTime);
-  // console.log(tvShow);
-
-  return `<div class="container-grid">
-            <h2 class="airtime">${airtime}</h2>
-            <div class="show-grid-container">
-              ${tvShow
-                .map(
-                  show => `
-                  <div class="show-container">
-                    <h3 class="show-network">${
-                      show.show.network ? show.show.network.name : 'Unavailable'
-                    }</h3>
-                    <div class="show-info">
-                      <img src="${
-                        show.show.image ? show.show.image.medium : image
-                      }"/>
-                      <div class="show-desc">
-                        <div class="show-meta">
-                        <span class="show-rating">${starSvg}${
-                    show.show.rating.average ? show.show.rating.average : '0'
-                  }</span>                    
-                  ${checkExternalLink(show)}
-                        <p>S${show.season}
-                        <span class="middot">&middot;</span>
-                        E${show.number}</p>
-                        </div>
-                        <h4 class="show-title">${
-                          show.show.name ? show.show.name : 'Unavailable'
-                        }</h4>
-                      </div>
-                    </div>
-                  </div>
-                `
-                )
-                .join('')}
-            </div>
-          </div>`;
-}
-
-const starSvg = `<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" class="ipc-icon ipc-icon--star-inline"
+export const starSvg = `<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" class="ipc-icon ipc-icon--star-inline"
 viewBox="0 0 24 24" fill="currentColor" role="presentation">
 <g fill="#f5c518">
   <path

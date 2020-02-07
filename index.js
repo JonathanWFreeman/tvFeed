@@ -16,17 +16,33 @@ import {
 import optionsFilter from './src/modules/filters';
 import { handleToggle, handleNavClick } from './src/modules/handlers';
 
-let listOfShows;
+let listOfShowsToday;
+let listOfShowsTomorrow;
+let filteredList;
 
-async function generateShowList(type = null, timeOfShow = 'primetime') {
+async function generateShowList(
+  type = null,
+  timeOfShow = 'primetime',
+  filterDate = 'today'
+) {
   // create a show list array from fetchApi
-  if (!listOfShows) {
-    const list = await filterTodayShows().catch(handleError);
-    listOfShows = list;
-    generateShowTypeOptions(listOfShows);
+  if (filterDate === 'today') {
+    if (!listOfShowsToday) {
+      const list = await filterTodayShows(filterDate).catch(handleError);
+      listOfShowsToday = list;
+      generateShowTypeOptions(listOfShowsToday);
+    }
+    filteredList = optionsFilter(listOfShowsToday, timeOfShow);
   }
 
-  const filteredList = optionsFilter(listOfShows, timeOfShow);
+  if (filterDate === 'tomorrow') {
+    if (!listOfShowsTomorrow) {
+      const list = await filterTodayShows(filterDate).catch(handleError);
+      listOfShowsTomorrow = list;
+      generateShowTypeOptions(listOfShowsTomorrow);
+    }
+    filteredList = optionsFilter(listOfShowsTomorrow, timeOfShow);
+  }
 
   const generateHTML = Object.entries(sortedByAirtime(filteredList))
     .map(generateShowContainer)
@@ -53,9 +69,22 @@ function handleFormInput(e) {
   generateShowList(showType, showTime);
 }
 
+export function handleNavClick2(e) {
+  console.dir(e.target.dataset.day);
+  console.dir(e.currentTarget.children[0].children);
+  const navUl = Array.from(e.currentTarget.children[0].children);
+
+  console.dir(navUl);
+  navUl.forEach(el => el.classList.remove('active'));
+  // e.currentTarget.children[0].children.classList.remove('active');
+  e.target.classList.add('active');
+
+  generateShowList(undefined, undefined, e.target.dataset.day);
+}
+
 optionsForm.addEventListener('input', handleFormInput);
 menuToggle.addEventListener('click', handleToggle);
-nav.addEventListener('click', handleNavClick);
+nav.addEventListener('click', handleNavClick2);
 
 date.textContent = currentDate;
 

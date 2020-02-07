@@ -6,6 +6,7 @@ header {
   transition: margin-left .5s;
   box-shadow: 0 0 10px 4px rgb(28, 28, 28);
   padding: 10px 0;
+  z-index: 100;
 }
 
 nav ul li {

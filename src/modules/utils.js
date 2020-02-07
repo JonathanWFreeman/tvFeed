@@ -28,6 +28,22 @@ export function sortedByAirtime(listOfShows) {
   }, []);
 }
 
+function checkExternalLink(show) {
+  if (show.show.externals.imdb) {
+    return `<span class="show-imdb"><a href="https://www.imdb.com/title/${
+      show.show.externals.imdb
+    }/" target="_blank">${imdbSvg}</a></span>`;
+  }
+  // if (show.show.externals.thetvdb) {
+  //   return `<span class="show-tvdb"><a href="https://thetvdb.com/series/${
+  //     show.show.externals.thetvdb
+  //   }" target="_blank">tvdb</a></span>`;
+  // }
+  return `<span class="show-imdb"><a href="https://www.imdb.com/find?q=${
+    show.show.name
+  }" target="_blank">${imdbSvg}</a></span>`;
+}
+
 export function generateShowContainer([airtime, tvShow]) {
   const image = 'https://i.picsum.photos/id/229/200/200.jpg';
 
@@ -53,15 +69,10 @@ export function generateShowContainer([airtime, tvShow]) {
                         <span class="show-rating">${starSvg}${
                     show.show.rating.average ? show.show.rating.average : '0'
                   }</span>                    
-                  ${
-                    show.show.externals.imdb
-                      ? `<span class="show-imdb"><a href="https://www.imdb.com/title/${
-                          show.show.externals.imdb
-                        }/" target="_blank">${imdbSvg}</a></span>`
-                      : ''
-                  }
-                      
-                        <p>s${show.season}e${show.number}</p>
+                  ${checkExternalLink(show)}
+                        <p>S${show.season}
+                        <span class="middot">&middot;</span>
+                        E${show.number}</p>
                         </div>
                         <h4 class="show-title">${
                           show.show.name ? show.show.name : 'Unavailable'

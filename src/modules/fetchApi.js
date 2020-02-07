@@ -1,4 +1,4 @@
-import { isToday, isTomorrow, isYesterday } from 'date-fns';
+import { isToday, isTomorrow } from 'date-fns';
 import {
   userTodayDate,
   userYesterdayDate,
@@ -27,11 +27,14 @@ async function fetchShows() {
   return showList;
 }
 
-async function filterTodayShows() {
+async function filterTodayShows(day) {
   const shows = await fetchShows();
-  const filteredShows = shows.filter(show =>
-    isToday(convertToUserTimeZone(show.airstamp))
-  );
+  const filteredShows = shows.filter(show => {
+    if (day === 'today') {
+      return isToday(convertToUserTimeZone(show.airstamp));
+    }
+    return isTomorrow(convertToUserTimeZone(show.airstamp));
+  });
   return filteredShows;
 }
 

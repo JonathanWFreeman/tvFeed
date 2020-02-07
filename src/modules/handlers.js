@@ -14,6 +14,7 @@ export function handleToggle(e) {
 }
 
 export function handleNavClick(e) {
+  console.dir(e.target.dataset.day);
   console.dir(e.currentTarget.children[0].children);
   const navUl = Array.from(e.currentTarget.children[0].children);
 

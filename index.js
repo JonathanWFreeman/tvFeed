@@ -52,44 +52,40 @@ async function generateShowList(
   app.innerHTML = generateHTML;
 }
 
-function handleFormInput(e) {
-  let showType = e.target.value;
-  let showTime;
-
-  if (showType === 'All') {
-    showType = null;
-  }
-
-  if (e.target.type === 'radio') {
-    showTime = e.target.value;
-  }
-  generateShowList(showType, showTime);
-}
-
-export function handleNavClick2(e) {
-  const navUl = Array.from(e.currentTarget.children[0].children);
-
-  navUl.forEach(el => el.classList.remove('active'));
-  e.target.classList.add('active');
-
-  generateShowList(undefined, undefined, e.target.dataset.day);
-}
-
+// find video for making state in javascript
+let timeOfDay;
+let showType;
+let showTime;
 function handleFilters(e) {
   console.log(e);
 
   if (e.target.dataset.day) {
-    console.log('here');
+    console.dir(e.currentTarget);
+    const navUl = Array.from(e.currentTarget.children[0].children);
+    navUl.forEach(el => el.classList.remove('active'));
+    e.target.classList.add('active');
+    timeOfDay = e.target.dataset.day;
   }
 
-  if (e.target.type) {
-    console.log('here');
+  if (e.target.type === 'checkbox') {
+    console.log('checkbox');
   }
+
+  if (e.target.type === 'radio') {
+    showType = null;
+    showTime;
+    // filter through array of checked
+
+    showTime = e.target.value;
+  }
+  console.log({ showType });
+  console.log({ showTime });
+  console.log({ timeOfDay });
+  generateShowList(showType, showTime, timeOfDay);
 }
 
 // optionsForm.addEventListener('input', handleFormInput);
 menuToggle.addEventListener('click', handleToggle);
-nav.addEventListener('click', handleNavClick2);
 filters.addEventListener('click', handleFilters);
 
 date.textContent = currentDate;

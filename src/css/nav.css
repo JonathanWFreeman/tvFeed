@@ -9,7 +9,7 @@ header {
   z-index: 100;
 }
 
-nav div button {
+nav button {
   padding: 20px;
   margin-bottom: 5px;
   cursor: pointer;

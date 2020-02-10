@@ -4,6 +4,8 @@ import {
   generateShowTypeOptions,
   handleError,
   sortedByAirtime,
+  state,
+  removeDuplicates,
 } from './src/modules/utils';
 import { generateShowContainer } from './src/modules/showGenerators';
 import {
@@ -13,75 +15,74 @@ import {
   menuToggle,
   nav,
   filters,
+  showTypeSelector,
 } from './src/modules/selectors';
-import optionsFilter from './src/modules/filters';
+import optionsFilter, { showTypeFilter } from './src/modules/filters';
 import { handleToggle, handleNavClick } from './src/modules/handlers';
 
 let listOfShowsToday;
 let listOfShowsTomorrow;
 let filteredList;
 
-async function generateShowList(
-  type = null,
-  timeOfShow = 'primetime',
-  filterDate = 'today'
-) {
+async function generateShowList() {
   // create a show list array from fetchApi
-  if (filterDate === 'today') {
+  if (state.timeOfDay === 'today') {
     if (!listOfShowsToday) {
-      const list = await filterTodayShows(filterDate).catch(handleError);
+      const list = await filterTodayShows(state.timeOfDay).catch(handleError);
       listOfShowsToday = list;
     }
     generateShowTypeOptions(listOfShowsToday);
-    filteredList = optionsFilter(listOfShowsToday, timeOfShow);
+    filteredList = optionsFilter(listOfShowsToday, state.showTime);
   }
 
-  if (filterDate === 'tomorrow') {
+  if (state.timeOfDay === 'tomorrow') {
     if (!listOfShowsTomorrow) {
-      const list = await filterTodayShows(filterDate).catch(handleError);
+      const list = await filterTodayShows(state.timeOfDay).catch(handleError);
       listOfShowsTomorrow = list;
     }
     generateShowTypeOptions(listOfShowsTomorrow);
-    filteredList = optionsFilter(listOfShowsTomorrow, timeOfShow);
+    filteredList = optionsFilter(listOfShowsTomorrow, state.showTime);
   }
+  const test = ['Reality', 'News', 'Award Show'];
+  const filteredCategory = showTypeFilter(filteredList, state.showCategories);
 
-  const generateHTML = Object.entries(sortedByAirtime(filteredList))
+  const generateHTML = Object.entries(sortedByAirtime(filteredCategory))
     .map(generateShowContainer)
     .join('');
 
   app.innerHTML = generateHTML;
 }
 
-// find video for making state in javascript
-let timeOfDay;
-let showType;
-let showTime;
 function handleFilters(e) {
   console.log(e);
 
   if (e.target.dataset.day) {
-    console.dir(e.currentTarget);
     const navUl = Array.from(e.currentTarget.children[0].children);
     navUl.forEach(el => el.classList.remove('active'));
     e.target.classList.add('active');
-    timeOfDay = e.target.dataset.day;
+    state.timeOfDay = e.target.dataset.day;
   }
 
   if (e.target.type === 'checkbox') {
-    console.log('checkbox');
+    const showTypeChildren = Array.from(showTypeSelector.children);
+    state.showCategories = [];
+
+    showTypeChildren.forEach(child => {
+      if (child.firstElementChild.checked) {
+        console.log(child.firstElementChild.value);
+        state.showCategories = [
+          ...state.showCategories,
+          child.firstElementChild.value,
+        ];
+      }
+    });
+    console.log(state.showCategories);
   }
 
   if (e.target.type === 'radio') {
-    showType = null;
-    showTime;
-    // filter through array of checked
-
-    showTime = e.target.value;
+    state.showTime = e.target.value;
   }
-  console.log({ showType });
-  console.log({ showTime });
-  console.log({ timeOfDay });
-  generateShowList(showType, showTime, timeOfDay);
+  generateShowList();
 }
 
 // optionsForm.addEventListener('input', handleFormInput);
@@ -90,4 +91,9 @@ filters.addEventListener('click', handleFilters);
 
 date.textContent = currentDate;
 
-generateShowList();
+async function bleh() {
+  await generateShowList();
+  state.showCategories = removeDuplicates(listOfShowsToday);
+  console.log(state.showCategories);
+}
+bleh();

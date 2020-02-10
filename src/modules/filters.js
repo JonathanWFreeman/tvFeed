@@ -17,6 +17,19 @@ function optionsFilter(listOfShows, timeOfShow) {
   });
 }
 
+export function showTypeFilter(listOfShows, showType) {
+  return listOfShows.filter(({ show }) => {
+    let newList;
+    showType.map(type => {
+      if (show.type === type) {
+        newList = show;
+      }
+      return null;
+    });
+    return newList;
+  });
+}
+
 // const showHTML = listOfShows
 //   .filter(({show}) => type ? show.type === type : show)
 //   // .filter(({show}) => show.type !== 'News' && show.type !== 'Talk Show')

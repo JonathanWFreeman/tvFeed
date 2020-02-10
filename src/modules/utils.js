@@ -1,15 +1,22 @@
 import { showTypeSelector } from './selectors';
 import { convertToUserTimeZone, convert12hrTime } from './timeZone';
 
-export function generateShowTypeOptions(list) {
+export function removeDuplicates(list) {
+  console.log(list);
   const getShowTypes = list.map(({ show }) => show.type);
   const removeShowTypeDuplicates = [...new Set(getShowTypes)];
+  return removeShowTypeDuplicates;
+}
+
+export function generateShowTypeOptions(list) {
   // removeShowTypeDuplicates.unshift('All');
-  const showTypeOptions = removeShowTypeDuplicates
+  const showTypeOptions = removeDuplicates(list)
     .map(
       show => `
-      <input type="checkbox" id="${show}" name="${show}" value="${show}" checked>
-      <label for="${show}">${show}</label></br>
+      <div>
+        <input type="checkbox" id="${show}" name="${show}" value="${show}" checked>
+        <label for="${show}">${show}</label></br>
+      </div>
       `
     )
     .join('');
@@ -48,6 +55,12 @@ export function checkExternalLink(show) {
     show.show.name
   }" target="_blank">${imdbSvg}</a></span>`;
 }
+
+export const state = {
+  showCategories: [],
+  timeOfDay: 'today',
+  showTime: 'primetime',
+};
 
 export const starSvg = `<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" class="ipc-icon ipc-icon--star-inline"
 viewBox="0 0 24 24" fill="currentColor" role="presentation">

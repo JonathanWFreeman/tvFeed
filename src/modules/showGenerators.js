@@ -1,10 +1,24 @@
-import { checkExternalLink, starSvg } from './utils';
+import { checkExternalLink, starSvg, state, sortedByAirtime } from './utils';
+import { showTypeFilter, filterDay } from './filters';
+import { app } from './selectors';
+
+export async function generateShowList() {
+  await filterDay();
+
+  const filteredCategory = showTypeFilter(
+    state.filteredList,
+    state.showCategories
+  );
+
+  const generateHTML = Object.entries(sortedByAirtime(filteredCategory))
+    .map(generateShowContainer)
+    .join('');
+
+  app.innerHTML = generateHTML;
+}
 
 export function generateShowContainer([airtime, tvShow]) {
   const image = 'https://i.picsum.photos/id/229/200/200.jpg';
-
-  // console.log(airTime);
-  // console.log(tvShow);
 
   return `<div class="container-grid">
             <h2 class="airtime">${airtime}</h2>

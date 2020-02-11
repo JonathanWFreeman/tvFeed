@@ -30,5 +30,11 @@ export function convert24hrTime(airstamp) {
 export const userYesterdayDate = format(startOfYesterday(), 'yyyy-MM-dd');
 export const userTodayDate = format(now, 'yyyy-MM-dd');
 export const userTomorrowDate = format(startOfTomorrow(), 'yyyy-MM-dd');
+
 export const currentDate = format(now, 'iiii, LLLL do, yyyy');
-// export const userDate = '2020-01-12';
+export function getDateOfEpisodes(date) {
+  if (date === 'tomorrow') {
+    return format(startOfTomorrow(), 'iiii, LLLL do, yyyy');
+  }
+  return format(now, 'iiii, LLLL do, yyyy');
+}

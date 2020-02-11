@@ -1,60 +1,17 @@
-import filterTodayShows from './src/modules/fetchApi';
-import { currentDate } from './src/modules/timeZone';
+import { getDateOfEpisodes } from './src/modules/timeZone';
+import { state, removeDuplicates } from './src/modules/utils';
+import { filterDay } from './src/modules/filters';
+import { generateShowList } from './src/modules/showGenerators';
 import {
-  generateShowTypeOptions,
-  handleError,
-  sortedByAirtime,
-  state,
-  removeDuplicates,
-} from './src/modules/utils';
-import { generateShowContainer } from './src/modules/showGenerators';
-import {
-  app,
   date,
-  optionsForm,
   menuToggle,
-  nav,
   filters,
   showTypeSelector,
 } from './src/modules/selectors';
-import optionsFilter, { showTypeFilter } from './src/modules/filters';
-import { handleToggle, handleNavClick } from './src/modules/handlers';
-
-let listOfShowsToday;
-let listOfShowsTomorrow;
-let filteredList;
-
-async function generateShowList() {
-  // create a show list array from fetchApi
-  if (state.timeOfDay === 'today') {
-    if (!listOfShowsToday) {
-      const list = await filterTodayShows(state.timeOfDay).catch(handleError);
-      listOfShowsToday = list;
-    }
-    generateShowTypeOptions(listOfShowsToday);
-    filteredList = optionsFilter(listOfShowsToday, state.showTime);
-  }
-
-  if (state.timeOfDay === 'tomorrow') {
-    if (!listOfShowsTomorrow) {
-      const list = await filterTodayShows(state.timeOfDay).catch(handleError);
-      listOfShowsTomorrow = list;
-    }
-    generateShowTypeOptions(listOfShowsTomorrow);
-    filteredList = optionsFilter(listOfShowsTomorrow, state.showTime);
-  }
-  const test = ['Reality', 'News', 'Award Show'];
-  const filteredCategory = showTypeFilter(filteredList, state.showCategories);
-
-  const generateHTML = Object.entries(sortedByAirtime(filteredCategory))
-    .map(generateShowContainer)
-    .join('');
-
-  app.innerHTML = generateHTML;
-}
+import { handleToggle } from './src/modules/handlers';
 
 function handleFilters(e) {
-  console.log(e);
+  console.log(e.target);
 
   if (e.target.dataset.day) {
     const navUl = Array.from(e.currentTarget.children[0].children);
@@ -63,7 +20,7 @@ function handleFilters(e) {
     state.timeOfDay = e.target.dataset.day;
   }
 
-  if (e.target.type === 'checkbox') {
+  if (e.target.matches('input[type="checkbox"]')) {
     const showTypeChildren = Array.from(showTypeSelector.children);
     state.showCategories = [];
 
@@ -79,21 +36,20 @@ function handleFilters(e) {
     console.log(state.showCategories);
   }
 
-  if (e.target.type === 'radio') {
+  if (e.target.matches('input[type="radio"]')) {
     state.showTime = e.target.value;
   }
   generateShowList();
 }
 
-// optionsForm.addEventListener('input', handleFormInput);
 menuToggle.addEventListener('click', handleToggle);
 filters.addEventListener('click', handleFilters);
 
-date.textContent = currentDate;
-
-async function bleh() {
+async function onLoad() {
+  await filterDay();
+  state.showCategories = removeDuplicates(state.listOfShowsToday);
   await generateShowList();
-  state.showCategories = removeDuplicates(listOfShowsToday);
   console.log(state.showCategories);
+  date.textContent = getDateOfEpisodes('today');
 }
-bleh();
+onLoad();

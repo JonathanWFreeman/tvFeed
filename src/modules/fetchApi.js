@@ -27,7 +27,7 @@ async function fetchShows() {
   return showList;
 }
 
-async function filterTodayShows(day) {
+async function filterShows(day) {
   const shows = await fetchShows();
   const filteredShows = shows.filter(show => {
     if (day === 'today') {
@@ -46,4 +46,4 @@ async function filterTodayShows(day) {
 //   return listOfShows;
 // }
 
-export default filterTodayShows;
+export default filterShows;

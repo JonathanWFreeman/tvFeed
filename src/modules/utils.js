@@ -2,7 +2,6 @@ import { showTypeSelector } from './selectors';
 import { convertToUserTimeZone, convert12hrTime } from './timeZone';
 
 export function removeDuplicates(list) {
-  console.log(list);
   const getShowTypes = list.map(({ show }) => show.type);
   const removeShowTypeDuplicates = [...new Set(getShowTypes)];
   return removeShowTypeDuplicates;
@@ -60,6 +59,9 @@ export const state = {
   showCategories: [],
   timeOfDay: 'today',
   showTime: 'primetime',
+  listOfShowsToday: null,
+  listOfShowsTomorrow: null,
+  filteredList: null,
 };
 
 export const starSvg = `<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" class="ipc-icon ipc-icon--star-inline"

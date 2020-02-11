@@ -1,6 +1,13 @@
-import { convertToUserTimeZone, convert24hrTime } from './timeZone';
+import {
+  convertToUserTimeZone,
+  convert24hrTime,
+  getDateOfEpisodes,
+} from './timeZone';
+import filterShows from './fetchApi';
+import { date } from './selectors';
+import { state, handleError, generateShowTypeOptions } from './utils';
 
-function optionsFilter(listOfShows, timeOfShow) {
+export function optionsFilter(listOfShows, timeOfShow) {
   return listOfShows.filter(show => {
     const time = parseInt(
       convert24hrTime(convertToUserTimeZone(show.airstamp))
@@ -30,10 +37,29 @@ export function showTypeFilter(listOfShows, showType) {
   });
 }
 
-// const showHTML = listOfShows
-//   .filter(({show}) => type ? show.type === type : show)
-//   // .filter(({show}) => show.type !== 'News' && show.type !== 'Talk Show')
-//   .map(generateShowContainer)
-//   .join('');
+export async function filterDay() {
+  if (state.timeOfDay === 'today') {
+    if (!state.listOfShowsToday) {
+      const list = await filterShows(state.timeOfDay).catch(handleError);
+      state.listOfShowsToday = list;
+      console.log('supTD');
+    }
+    generateShowTypeOptions(state.listOfShowsToday);
+    state.filteredList = optionsFilter(state.listOfShowsToday, state.showTime);
+    date.textContent = getDateOfEpisodes('today');
+  }
 
-export default optionsFilter;
+  if (state.timeOfDay === 'tomorrow') {
+    if (!state.listOfShowsTomorrow) {
+      const list = await filterShows(state.timeOfDay).catch(handleError);
+      state.listOfShowsTomorrow = list;
+      console.log('supTM');
+    }
+    generateShowTypeOptions(state.listOfShowsTomorrow);
+    state.filteredList = optionsFilter(
+      state.listOfShowsTomorrow,
+      state.showTime
+    );
+    date.textContent = getDateOfEpisodes('tomorrow');
+  }
+}

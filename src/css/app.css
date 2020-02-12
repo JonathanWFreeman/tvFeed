@@ -6,6 +6,19 @@ main {
   margin: 20px 0;
 }
 
+a {
+  color: blue;
+  font-weight: bold;
+}
+
+a:hover {
+  color: orange;
+}
+
+a:visited {
+  color: purple;
+}
+
 .date {
   text-align: center;
   margin-bottom: 30px;
@@ -32,10 +45,6 @@ main {
 
 .show-container {
   text-align: center;
-}
-
-.show-info {
-  /* box-shadow: 0 0 10px 4px rgb(28, 28, 28); */
 }
 
 .show-meta {
@@ -74,8 +83,6 @@ main {
 .show-info img {
   width: 100%;
   box-shadow: 0 0 10px 4px rgb(28, 28, 28);
-  /* object-fit: cover; */
-  /* border:1px solid black; */
 }
 
 .show-desc {
@@ -92,8 +99,4 @@ main {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.middot {
-  font-size: 18rem;
 }

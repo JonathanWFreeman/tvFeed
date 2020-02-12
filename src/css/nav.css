@@ -16,6 +16,7 @@ nav button {
   width: 100%;
   text-align: center;
   outline: none;
+  font-weight: bold;
 }
 
 .active {

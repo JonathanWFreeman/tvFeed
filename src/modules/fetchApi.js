@@ -1,14 +1,6 @@
-import { isToday, isTomorrow } from 'date-fns';
-import {
-  userTodayDate,
-  userYesterdayDate,
-  userTomorrowDate,
-  convertToUserTimeZone,
-} from './timeZone';
-import { generateShowTypeOptions, handleError } from './utils';
+import { userTodayDate, userYesterdayDate, userTomorrowDate } from './timeZone';
 
 const endpoint = 'https://api.tvmaze.com/schedule?country=US&date=';
-let listOfShows;
 
 async function fetchShows() {
   let showList = [];
@@ -27,23 +19,4 @@ async function fetchShows() {
   return showList;
 }
 
-async function filterShows(day) {
-  const shows = await fetchShows();
-  const filteredShows = shows.filter(show => {
-    if (day === 'today') {
-      return isToday(convertToUserTimeZone(show.airstamp));
-    }
-    return isTomorrow(convertToUserTimeZone(show.airstamp));
-  });
-  return filteredShows;
-}
-
-// async function showListForToday() {
-//   if (!listOfShows) {
-//     listOfShows = await filterTodayShows().catch(handleError);
-//     generateShowTypeOptions(listOfShows);
-//   }
-//   return listOfShows;
-// }
-
-export default filterShows;
+export default fetchShows;

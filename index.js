@@ -10,7 +10,7 @@ import {
 } from './src/modules/selectors';
 import { handleToggle } from './src/modules/handlers';
 
-function handleFilters(e) {
+async function handleFilters(e) {
   console.log(e.target);
 
   if (e.target.dataset.day) {
@@ -18,6 +18,7 @@ function handleFilters(e) {
     navUl.forEach(el => el.classList.remove('active'));
     e.target.classList.add('active');
     state.timeOfDay = e.target.dataset.day;
+    await filterDay();
   }
 
   if (e.target.matches('input[type="checkbox"]')) {

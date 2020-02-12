@@ -1,24 +1,28 @@
 import { checkExternalLink, starSvg, state, sortedByAirtime } from './utils';
-import { showTypeFilter, filterDay } from './filters';
+import { showTypeFilter, timeOfDayFilter } from './filters';
 import { app } from './selectors';
 
 export async function generateShowList() {
-  await filterDay();
+  // filters show based on time of day
+  const filteredTimeOfDay = timeOfDayFilter(state.filteredList, state.showTime);
 
+  // filters shows based on show category type
   const filteredCategory = showTypeFilter(
-    state.filteredList,
+    filteredTimeOfDay,
     state.showCategories
   );
 
+  // filtered list that sorts shows by air time
   const generateHTML = Object.entries(sortedByAirtime(filteredCategory))
     .map(generateShowContainer)
     .join('');
 
+  // sets list to page
   app.innerHTML = generateHTML;
 }
 
 export function generateShowContainer([airtime, tvShow]) {
-  const image = 'https://i.picsum.photos/id/229/200/200.jpg';
+  const image = 'https://i.picsum.photos/id/1025/210/295.jpg';
 
   return `<div class="container-grid">
             <h2 class="airtime">${airtime}</h2>
@@ -41,7 +45,7 @@ export function generateShowContainer([airtime, tvShow]) {
                   }</span>                    
                   ${checkExternalLink(show)}
                         <p>S${show.season}
-                        <span class="middot">&middot;</span>
+                        <span>&middot;</span>
                         E${show.number}</p>
                         </div>
                         <h4 class="show-title">${

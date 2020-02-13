@@ -12,10 +12,11 @@ export function generateShowTypeOptions(list) {
   const showTypeOptions = removeDuplicates(list)
     .map(
       show => `
-      <div>
+      <label class="squaredThree" for="${show}">
         <input type="checkbox" id="${show}" name="${show}" value="${show}" checked>
-        <label for="${show}">${show}</label></br>
-      </div>
+        <label for="${show}"></label>
+        <span>${show}</span>
+      </label>
       `
     )
     .join('');

@@ -8,7 +8,6 @@ export function removeDuplicates(list) {
 }
 
 export function generateShowTypeOptions(list) {
-  // removeShowTypeDuplicates.unshift('All');
   const showTypeOptions = removeDuplicates(list)
     .map(
       show => `
@@ -46,11 +45,6 @@ export function checkExternalLink(show) {
       show.show.externals.imdb
     }/" target="_blank">${imdbSvg}</a></span>`;
   }
-  // if (show.show.externals.thetvdb) {
-  //   return `<span class="show-tvdb"><a href="https://thetvdb.com/series/${
-  //     show.show.externals.thetvdb
-  //   }" target="_blank">tvdb</a></span>`;
-  // }
   return `<span class="show-imdb"><a href="https://www.imdb.com/find?q=${
     show.show.name
   }" target="_blank">${imdbSvg}</a></span>`;

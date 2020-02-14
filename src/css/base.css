@@ -17,16 +17,16 @@ main {
 }
 
 a {
-  color: blue;
+  color: #689dff;
   font-weight: bold;
 }
 
 a:hover {
-  color: orange;
+  color: var(--highlight-color);
 }
 
 a:visited {
-  color: purple;
+  color: #953bfc;
 }
 
 /* Custom Scrollbar */

@@ -1,5 +1,5 @@
 footer {
-  background-color: #F83646;
+  border-top: 4px solid #F83646;
   padding: 20px;
   display: flex;
   justify-content: space-evenly;

@@ -1,13 +1,17 @@
-import { header } from './selectors';
+import { header, menuToggle } from './selectors';
 
-let isTrue = false;
+// let isTrue = false;
 
-export function handleToggle(e) {
-  isTrue = !isTrue;
+export function handleToggle() {
+  // isTrue = !isTrue;
 
-  isTrue
-    ? header.classList.add('toggle-open')
-    : header.classList.remove('toggle-open');
+  // isTrue
+  //   ? header.classList.add('toggle-open')
+  //   : header.classList.remove('toggle-open');
+
+  header.classList.toggle('toggle-open');
+  menuToggle.classList.toggle('animate');
+  header.classList.toggle('toggle-closed');
 }
 
 export function handleNavClick(e) {

@@ -11,10 +11,12 @@
 </head>
 
 <body>
-  <header>
-    <div class="menu-toggle">&#x1F4A9;</div>
+  <header class="toggle-closed">
+    <div class="menu-wrapper">
+      <div class="menu-toggle hamburger-menu"></div>
+    </div>
     <section class="nav-container">
-      <h1 class="title">New Episodes</h1>
+      <h1 class="title">QuickTV</h1>
       <div id="filters">
         <nav>
           <button class="active" data-day="today">Today</button>
@@ -37,6 +39,7 @@
   <main>
     <h2 class="date"></h2>
     <div class="app"></div>
+    <div id="loader"></div>
   </main>
   <footer>
     <p>API provided by <a href="https://www.tvmaze.com/api" target="_blank">TV Maze</a></p>

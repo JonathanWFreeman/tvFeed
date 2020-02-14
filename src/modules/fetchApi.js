@@ -1,8 +1,10 @@
 import { userTodayDate, userYesterdayDate, userTomorrowDate } from './timeZone';
+import { loader } from './utils';
 
 const endpoint = 'https://api.tvmaze.com/schedule?country=US&date=';
 
 async function fetchShows() {
+  loader();
   let showList = [];
 
   const yesterdayRes = await fetch(`${endpoint}${userYesterdayDate}`);
@@ -16,6 +18,7 @@ async function fetchShows() {
 
   showList = [...yesterdayData, ...todayData, ...tomorrowData];
 
+  loader();
   return showList;
 }
 

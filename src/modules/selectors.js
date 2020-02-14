@@ -6,3 +6,4 @@ export const menuToggle = document.querySelector('.menu-toggle');
 export const header = document.querySelector('header');
 export const nav = document.querySelector('nav');
 export const filters = document.querySelector('#filters');
+export const loaderEl = document.querySelector('#loader');

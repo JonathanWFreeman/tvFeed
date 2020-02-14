@@ -24,10 +24,25 @@ footer {
   grid-area: footer;
 }
 
+.loader{
+  position: absolute;
+  top: 0;
+  left: 500px;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 100px;
+  height: 60px;
+  transform: scale(5);
+}
+
 @media (max-width: 600px) {
   body {
     display: grid;
-    grid-template-areas: "header main";
     grid-template-columns: 50px 1fr;
+  }
+
+  .loader{
+    top: 500px;
   }
 }

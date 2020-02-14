@@ -18,6 +18,8 @@ export function handleNavClick(e) {
 }
 
 export async function handleFilters(e) {
+  let showTime;
+
   if (e.target.dataset.day) {
     const navUl = Array.from(e.currentTarget.children[0].children);
     navUl.forEach(el => el.classList.remove('active'));
@@ -45,7 +47,7 @@ export async function handleFilters(e) {
   }
 
   if (e.target.matches('input[type="radio"]')) {
-    state.showTime = e.target.value;
+    showTime = e.target.value;
   }
-  generateShowList();
+  generateShowList(showTime);
 }

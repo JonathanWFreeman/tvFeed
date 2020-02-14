@@ -1,16 +1,7 @@
 import { isToday, isTomorrow } from 'date-fns';
-import {
-  convertToUserTimeZone,
-  convert24hrTime,
-  getDateOfEpisodes,
-} from './timeZone';
+import { convertToUserTimeZone, convert24hrTime } from './timeZone';
 import fetchShows from './fetchApi';
-import { date } from './selectors';
-import {
-  state,
-  handleError,
-  generateShowTypeOptions as createCategoryList,
-} from './utils';
+import { state, handleError, createCategoryList } from './utils';
 
 // filter based on primetime or daytime airing
 export function timeOfDayFilter(listOfShows, timeOfShow) {
@@ -44,25 +35,26 @@ export function showTypeFilter(listOfShows, showType) {
 }
 
 // filter based on if day is today or tomorrow
+let listOfShowsToday = null;
+let listOfShowsTomorrow = null;
 export async function filterDay() {
   if (state.timeOfDay === 'today') {
-    if (!state.listOfShowsToday) {
+    if (!listOfShowsToday) {
       const list = await filterShows(state.timeOfDay).catch(handleError);
-      state.listOfShowsToday = list;
+      listOfShowsToday = list;
     }
-    createCategoryList(state.listOfShowsToday);
-    state.filteredList = state.listOfShowsToday;
+    createCategoryList(listOfShowsToday);
+    return listOfShowsToday;
   }
 
   if (state.timeOfDay === 'tomorrow') {
-    if (!state.listOfShowsTomorrow) {
+    if (!listOfShowsTomorrow) {
       const list = await filterShows(state.timeOfDay).catch(handleError);
-      state.listOfShowsTomorrow = list;
+      listOfShowsTomorrow = list;
     }
-    createCategoryList(state.listOfShowsTomorrow);
-    state.filteredList = state.listOfShowsTomorrow;
+    createCategoryList(listOfShowsTomorrow);
+    return listOfShowsTomorrow;
   }
-  date.textContent = getDateOfEpisodes(state.timeOfDay);
 }
 
 // returns show list based on airing today or tomorrow

@@ -137,13 +137,7 @@ input[type=radio]:checked + label {
 
 .menu-wrapper {
   position: absolute;
-  /* top: 0; */
-  /* left: 0; */
   right: -25px;
-  /* bottom: 0; */
-  /* margin: auto; */
-  /* width: 100px; */
-  /* height: 60px; */
   transform: scale(.2);
   cursor: pointer;
 }

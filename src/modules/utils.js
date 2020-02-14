@@ -7,7 +7,7 @@ export function removeDuplicates(list) {
   return removeShowTypeDuplicates;
 }
 
-export function generateShowTypeOptions(list) {
+export function createCategoryList(list) {
   const showTypeOptions = removeDuplicates(list)
     .map(
       show => `
@@ -60,10 +60,6 @@ export function loader() {
 export const state = {
   showCategories: [],
   timeOfDay: 'today',
-  showTime: 'primetime',
-  listOfShowsToday: null,
-  listOfShowsTomorrow: null,
-  filteredList: null,
 };
 
 export const starSvg = `<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" class="ipc-icon ipc-icon--star-inline"

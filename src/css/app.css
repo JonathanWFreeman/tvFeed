@@ -1,3 +1,7 @@
+.fill-height {
+  height: 100vh;
+}
+
 .date {
   text-align: center;
   margin-bottom: 30px;

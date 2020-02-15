@@ -1,7 +1,7 @@
 import { isToday, isTomorrow } from 'date-fns';
 import { convertToUserTimeZone, convert24hrTime } from './timeZone';
 import fetchShows from './fetchApi';
-import { state, handleError, createCategoryList } from './utils';
+import { state, handleError } from './utils';
 
 // filter based on primetime or daytime airing
 export function timeOfDayFilter(listOfShows, timeOfShow) {
@@ -35,15 +35,14 @@ export function showTypeFilter(listOfShows, showType) {
 }
 
 // filter based on if day is today or tomorrow
-let listOfShowsToday = null;
-let listOfShowsTomorrow = null;
+let listOfShowsToday;
+let listOfShowsTomorrow;
 export async function filterDay() {
   if (state.timeOfDay === 'today') {
     if (!listOfShowsToday) {
       const list = await filterShows(state.timeOfDay).catch(handleError);
       listOfShowsToday = list;
     }
-    createCategoryList(listOfShowsToday);
     return listOfShowsToday;
   }
 
@@ -52,7 +51,6 @@ export async function filterDay() {
       const list = await filterShows(state.timeOfDay).catch(handleError);
       listOfShowsTomorrow = list;
     }
-    createCategoryList(listOfShowsTomorrow);
     return listOfShowsTomorrow;
   }
 }

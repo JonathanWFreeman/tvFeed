@@ -1,9 +1,20 @@
-import { checkExternalLink, starSvg, state, sortedByAirtime } from './utils';
+import {
+  checkExternalLink,
+  starSvg,
+  state,
+  sortedByAirtime,
+  createCategoryList,
+} from './utils';
 import { showTypeFilter, timeOfDayFilter, filterDay } from './filters';
 import { app, date } from './selectors';
 import { getDateOfEpisodes } from './timeZone';
 
+let currentDay;
 export async function generateShowList(showTime = 'primetime') {
+  if (state.timeOfDay !== currentDay) createCategoryList(await filterDay());
+
+  currentDay = state.timeOfDay;
+
   // filters show based on time of day
   const filteredTimeOfDay = timeOfDayFilter(await filterDay(), showTime);
 

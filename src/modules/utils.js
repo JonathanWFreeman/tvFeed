@@ -14,7 +14,7 @@ export function createCategoryList(list) {
       <label class="customCheckbox checkboxSelected" for="${show}">
         <input type="checkbox" id="${show}" name="${show}" value="${show}" checked>
         <label for="${show}"></label>
-        <span>${show}</span>
+        <span class="show-category">${show}</span>
       </label>
       `
     )

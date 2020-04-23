@@ -1,10 +1,10 @@
 import {
   checkExternalLink,
-  starSvg,
   state,
   sortedByAirtime,
   createCategoryList,
 } from './utils';
+import { starSvg } from './svgs';
 import { showTypeFilter, timeOfDayFilter, filterDay } from './filters';
 import { app, date } from './selectors';
 import { getDateOfEpisodes } from './timeZone';

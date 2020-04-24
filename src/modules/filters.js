@@ -43,6 +43,7 @@ export async function filterDay() {
       const list = await filterShows(state.timeOfDay).catch(handleError);
       listOfShowsToday = list;
     }
+    console.log('today');
     return listOfShowsToday;
   }
 
@@ -51,6 +52,7 @@ export async function filterDay() {
       const list = await filterShows(state.timeOfDay).catch(handleError);
       listOfShowsTomorrow = list;
     }
+    console.log('tomorrow');
     return listOfShowsTomorrow;
   }
 }

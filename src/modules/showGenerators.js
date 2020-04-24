@@ -3,6 +3,7 @@ import {
   state,
   sortedByAirtime,
   createCategoryList,
+  removeDuplicates,
 } from './utils';
 import { starSvg } from './svgs';
 import { showTypeFilter, timeOfDayFilter, filterDay } from './filters';
@@ -11,19 +12,23 @@ import { getDateOfEpisodes } from './timeZone';
 
 let currentDay;
 export async function generateShowList(showTime = 'primetime') {
-  if (state.timeOfDay !== currentDay) createCategoryList(await filterDay());
+  if (state.timeOfDay !== currentDay) {
+    createCategoryList(await filterDay());
+    state.showCategories = removeDuplicates(await filterDay());
+  }
 
   currentDay = state.timeOfDay;
 
   // filters show based on time of day
-  const filteredTimeOfDay = timeOfDayFilter(await filterDay(), showTime);
+  const filteredTimeOfDayList = timeOfDayFilter(await filterDay(), showTime);
 
   // filters shows based on show category type
   const filteredCategory = showTypeFilter(
-    filteredTimeOfDay,
+    filteredTimeOfDayList,
     state.showCategories
   );
-
+  console.log(filteredTimeOfDayList);
+  console.log(state.showCategories);
   // filtered list that sorts shows by air time
   const generateHTML = Object.entries(sortedByAirtime(filteredCategory))
     .map(generateShowContainer)

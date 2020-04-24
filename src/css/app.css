@@ -9,6 +9,7 @@
 
 .container-grid {
 	padding: 20px;
+	overflow: hidden;
 }
 
 .container-grid:nth-child(even) {
@@ -28,6 +29,8 @@
 
 .show-container {
 	text-align: center;
+	animation-name: example;
+	animation-duration: 1s;
 }
 
 .show-meta {
@@ -81,4 +84,13 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+@keyframes example {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }

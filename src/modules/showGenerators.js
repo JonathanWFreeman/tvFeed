@@ -37,7 +37,8 @@ export async function generateShowList(showTime = 'primetime') {
 }
 
 export function generateShowContainer([airtime, tvShow]) {
-  const image = 'https://i.picsum.photos/id/1025/210/295.jpg';
+  const image =
+    'https://res.cloudinary.com/jwfreeman/image/upload/v1587679911/QuickTV/no_image_nwewzw.jpg';
 
   return `<div class="container-grid">
             <h2 class="airtime">${airtime}</h2>

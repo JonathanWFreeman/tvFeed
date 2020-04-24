@@ -27,8 +27,6 @@ export async function generateShowList(showTime = 'primetime') {
     filteredTimeOfDayList,
     state.showCategories
   );
-  console.log(filteredTimeOfDayList);
-  console.log(state.showCategories);
   // filtered list that sorts shows by air time
   const generateHTML = Object.entries(sortedByAirtime(filteredCategory))
     .map(generateShowContainer)

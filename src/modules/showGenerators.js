@@ -37,11 +37,17 @@ export async function generateShowList(showTime = 'primetime') {
 
   // sets date to page
   date.textContent = getDateOfEpisodes(state.timeOfDay);
+
+  // lazy load images
+  loadImage();
 }
 
 export function generateShowContainer([airtime, tvShow]) {
   const image =
     'https://res.cloudinary.com/jwfreeman/image/upload/v1587679911/QuickTV/no_image_nwewzw.jpg';
+
+  const base =
+    'https://res.cloudinary.com/jwfreeman/image/upload/v1588009596/QuickTV/placeholder_fxoojh.png';
 
   return `<div class="container-grid">
             <h2 class="airtime">${airtime}</h2>
@@ -54,9 +60,11 @@ export function generateShowContainer([airtime, tvShow]) {
                       show.show.network ? show.show.network.name : 'Unavailable'
                     }</h3>
                     <div class="show-info">
-                      <img src="${
-                        show.show.image ? show.show.image.medium : image
-                      }"/>
+                    <div class="image-container" data-large="${
+                      show.show.image ? show.show.image.medium : image
+                    }">
+                    <img class="placeholder" src="${base}">
+                  </div>
                       <div class="show-desc">
                         <div class="show-meta">
                         <span class="show-rating">${starSvg}${
@@ -78,4 +86,18 @@ export function generateShowContainer([airtime, tvShow]) {
                 .join('')}
             </div>
           </div>`;
+}
+
+function loadImage() {
+  const largePicture = document.querySelectorAll('.image-container');
+  // Load large image
+  largePicture.forEach(img => {
+    const imgLarge = new Image();
+    imgLarge.src = img.dataset.large;
+    imgLarge.onload = function() {
+      imgLarge.classList.add('loaded');
+    };
+    imgLarge.classList.add('picture');
+    img.appendChild(imgLarge);
+  });
 }

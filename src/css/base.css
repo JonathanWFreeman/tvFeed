@@ -1,59 +1,59 @@
 :root {
-  /* --main-bg-color: brown; */
-  /* var(--primary-font-color); */
-  --primary-font-color: #FFF;
-  --primary-color: #222A31;
-  --secondary-color: #1A1C20;
-  --highlight-color: #F83646;
-  --box-shadow-color: #353434
+	/* --main-bg-color: brown; */
+	/* var(--primary-font-color); */
+	--primary-font-color: #fff;
+	--primary-color: #222a31;
+	--secondary-color: #1a1c20;
+	--highlight-color: #f83646;
+	--box-shadow-color: #353434;
 }
 
 body {
-  background-color: var(--primary-color);
+	background-color: var(--primary-color);
 }
 
 main {
-  margin-top: 35px;
+	margin-top: 35px;
 }
 
 a {
-  color: #689dff;
-  font-weight: bold;
+	color: #689dff;
+	font-weight: bold;
 }
 
 a:hover {
-  color: var(--highlight-color);
+	color: var(--highlight-color);
 }
 
 a:visited {
-  color: #953bfc;
+	color: #953bfc;
 }
 
 /* Custom Scrollbar */
 
 /* width */
 ::-webkit-scrollbar {
-  width: 5px;
+	width: 5px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+	background: #f1f1f1;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #555; 
+	background: #555;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--highlight-color); 
+	background: var(--highlight-color);
 }
 
 /* Custom Scrollbar End */
 
 .loader svg path,
-.loader svg rect{
-  fill: var(--highlight-color);
+.loader svg rect {
+	fill: var(--highlight-color);
 }

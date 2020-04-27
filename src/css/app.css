@@ -29,8 +29,6 @@
 
 .show-container {
 	text-align: center;
-	animation-name: example;
-	animation-duration: 1s;
 }
 
 .show-meta {
@@ -67,7 +65,33 @@
 
 .show-info img {
 	width: 100%;
-	box-shadow: 0 0 10px 4px var(--box-shadow-color);
+	height: auto;
+}
+
+.image-container {
+	position: relative;
+	overflow: hidden;
+}
+
+.placeholder {
+	position: relative;
+	width: 100%;
+	filter: blur(10px);
+	transform: scale(1);
+}
+
+.picture {
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	width: 100%;
+	height: 100%;
+	transition: opacity 1s linear;
+}
+
+.picture.loaded {
+	opacity: 1;
 }
 
 .show-desc {
@@ -84,13 +108,4 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-}
-
-@keyframes example {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
 }
